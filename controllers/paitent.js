@@ -4,7 +4,15 @@ const Appoinment = require('../models/appoinment')
 
 //get all paitents
 exports.getAllP = async (req,res) =>{
-    const paitent = await Paitent.find()
+
+    const {name} =  req.query
+    let search={}
+ 
+    if(name){
+    search.name = {$regex:name, $options:'i' }
+    
+   }
+    const paitent = await Paitent.find(search)
     res.status(200).send(paitent)
     
 }

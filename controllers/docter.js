@@ -3,14 +3,20 @@ const Doctor = require('../models/docter')
 //get all doctors
 exports.getAllD = async (req,res) =>{
    const {select} = req.query
-   let search
-   if(select){
-     search={
-         section:select
-     }
-   }else{
-       search = null
+   const {name} = req.query
+   let search={}
+   
+
+   if(name){
+    search.name = {$regex:name, $options:'i' }
+    
    }
+   if(select){
+       search.section = select
+   }
+
+
+   
 
    console.log(search)
    const doctor = await Doctor.find(search)
