@@ -36,8 +36,8 @@ var storage = multer.diskStorage({
 const uploadOption =  multer({storage:storage})
 
 
-Router.route('/').get(auth,isAdmin,getAllD).post(auth,uploadOption.single('image'),postD)
-Router.route('/:id').get(auth,isAdmin,getOneD).put(auth,uploadOption.single('image'),updateOneD).delete(auth,isAdmin,deleteOneD)
+Router.route('/').get(getAllD).post(auth,isAdmin,uploadOption.single('image'),postD)
+Router.route('/:id').get(getOneD).put(auth,isAdmin,uploadOption.single('image'),updateOneD).delete(auth,isAdmin,deleteOneD)
 
 
 module.exports = Router

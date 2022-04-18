@@ -2,7 +2,18 @@ const Doctor = require('../models/docter')
 
 //get all doctors
 exports.getAllD = async (req,res) =>{
-   const doctor = await Doctor.find()
+   const {select} = req.query
+   let search
+   if(select){
+     search={
+         section:select
+     }
+   }else{
+       search = null
+   }
+
+   console.log(search)
+   const doctor = await Doctor.find(search)
    res.status(200).send(doctor)
 }
 //post a doctor
